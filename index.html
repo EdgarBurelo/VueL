@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>G rowler Vue.Js</title>
+    <style>
+        .headers  {
+            font-family: "Verdana";
+            margin: 0;
+        }
+
+        .accent-color {
+            color: #FF6A00;
+        }
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="growler">
+        <!-- <h2 v-text="appName" v-bind:class="[accentColor, headers]"></h2> -->
+        <h2 v-cloak>{{appName}}</h2>
+        <h2 v-text="appName" v-bind:class="{
+            'headers': true,
+            'accent-color': isOnline
+            }">
+        </h2>
+        <img alt="Growler" v-bind:src="appLogo" style="height:35px;" />
+        <br>
+        <input v-model="query" placeholder="Search" >
+        <button type="submit" v-on:click.prevent="executeSearch('Token',$event)" >Search</button>
+        <br>
+        <div>Searching for: {{query}} </div>
+        <br>
+        <input v-model.lazy.trim="query1" placeholder="Search">
+        <br>
+        <div>Searching for: {{query1}} </div>
+        <br>
+        <label>
+            <input type="checkbox" v-model="searchIndexes" value="beers">
+            Beers
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" v-model="searchIndexes" value="breweries">
+            Breweries
+        </label>
+        <br>
+        <small>seleced: {{searchIndexes}}</small>
+        <br>
+        <label>
+            <input type="radio" v-model="searchIndexes2" value="beers">
+            Beers
+        </label>
+        <br>
+        <label>
+            <input type="radio" v-model="searchIndexes2" value="breweries">
+            Breweries
+        </label>
+        <br>
+        <small>seleced: {{searchIndexes2}}</small>
+        <br>
+        <select v-model="selectedSearchIndex">
+            <option value="beers">Beers</option>
+            <option value="breweries">Breweries</option>
+            <option value="distilleries">Distilleries</option>
+            <option value="pubs">Pubs</option>
+        </select>
+        <br>
+        <small>seleced: {{selectedSearchIndex}}</small>
+
+        <div>
+            <label><strong>Max Alcohol By volume (a.b.v)</strong></label>
+            <input type="range" v-model="maxAbv" min="0" max="100" />
+            <small>{{maxAbv}}%</small>
+        </div>
+
+        <ul>
+            <li><strong>Beers</strong></li>
+            <li v-for="beer in beers" v-if="beer.abv < maxAbv" >{{beer}}</li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" src="https://unpkg.com/vue"></script>
+<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    var growler = new Vue({
+        el: "#growler",
+        data: {
+            appName: 'Growler',
+            appLogo: "/public/img/logo.png",
+            isOnline: false,
+            query: "",
+            searchIndexes: [],
+            searchIndexes2: "beers",
+            selectedSearchIndex: "beers",
+            query1: "",
+            value: 0,
+            beers: [
+                { name: 'WhateverB1', abv:9.6 },
+                { name: 'WhateverB2', abv: 7.4 },
+                { name: 'WhateverB3', abv: 6.5 },
+                { name: 'WhateverB4', abv: 5.4 },
+                { name: 'WhateverB5', abv: 3.6 },
+
+            ],
+            maxAbv: 7.0,
+            // headers: "headers",
+            // accentColor: "accent-color"
+        },
+        methods: {
+            executeSearch: function(t, e) {
+                alert(`Token: ${t}, Query: ${this.query} Button: ${e.target.innerText}`);
+            },
+            updateValue: function() {
+                this.value++;
+            }
+        },
+        watch: {
+            query: 'updateValue'
+        }
+    });
+</script>
+</html>
