@@ -13,9 +13,9 @@
 export default {
   name: 'CollapsibleSection',
   data() {
-    return {open: true};
+    return { open: true };
   },
-}
+};
 </script>
 
 <style scoped>
@@ -25,4 +25,3 @@ export default {
     cursor: pointer;
   }
 </style>
-

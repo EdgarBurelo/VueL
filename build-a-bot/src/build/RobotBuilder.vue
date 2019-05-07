@@ -24,27 +24,32 @@
         {{selectedRobot.head.title}}
         <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
       </div> -->
-      <PartSelector v-bind:parts="availableParts.heads" position="top" v-on:partSelected="part => selectedRobot.head=part" />
+      <PartSelector v-bind:parts="availableParts.heads" position="top"
+      v-on:partSelected="part => selectedRobot.head=part" />
     </div>
     <div class="middle-row">
-      <PartSelector v-bind:parts="availableParts.arms" position="left" @partSelected="part => selectedRobot.leftArm=part" />
-      <PartSelector v-bind:parts="availableParts.torsos" position="center" @partSelected="part => selectedRobot.torso=part" />
-      <PartSelector v-bind:parts="availableParts.arms" position="right" @partSelected="part => selectedRobot.rightArm=part" />
+      <PartSelector v-bind:parts="availableParts.arms" position="left"
+      @partSelected="part => selectedRobot.leftArm=part" />
+      <PartSelector v-bind:parts="availableParts.torsos" position="center"
+      @partSelected="part => selectedRobot.torso=part" />
+      <PartSelector v-bind:parts="availableParts.arms" position="right"
+      @partSelected="part => selectedRobot.rightArm=part" />
     </div>
     <div class="bottom-row">
-      <PartSelector v-bind:parts="availableParts.bases" position="bottom" @partSelected="part => selectedRobot.base=part" />
+      <PartSelector v-bind:parts="availableParts.bases" position="bottom"
+      @partSelected="part => selectedRobot.base=part" />
     </div>
   </div>
 </template>
 
 <script>
 // import availableParts from "../data/parts";
-import createdHookMixin from "./created-hook-mixin";
-import PartSelector from "./PartSelector.vue";
-import CollapsibleSection from "../shared/CollapsibleSection.vue";
+import createdHookMixin from './created-hook-mixin';
+import PartSelector from './PartSelector.vue';
+import CollapsibleSection from '../shared/CollapsibleSection.vue';
 
 export default {
-  name: "RobotBuider",
+  name: 'RobotBuider',
   created() {
     this.$store.dispatch('robots/getParts');
   },
@@ -56,7 +61,7 @@ export default {
       next(response);
     }
   },
-  components: { PartSelector, CollapsibleSection, },
+  components: { PartSelector, CollapsibleSection },
   data() {
     return {
       // availableParts,
@@ -77,17 +82,21 @@ export default {
       return this.$store.state.robots.parts;
     },
     headBorderStyle() {
-      return { border: this.selectedRobot.head.onSale ? "3px solid red" : "3px solid #aaa", };
+      return { border: this.selectedRobot.head.onSale ? '3px solid red' : '3px solid #aaa' };
     },
   },
   methods: {
     addToCart() {
       const robot = this.selectedRobot;
-      const cost = robot.head.cost + robot.leftArm.cost + robot.torso.cost + robot.rightArm.cost + robot.base.cost;
-      this.$store.dispatch('robots/addRobotToCart',Object.assign({}, robot, { cost })).then(() => {this.$router.push("/cart")});
+      const cost = robot.head.cost
+        + robot.leftArm.cost
+        + robot.torso.cost
+        + robot.rightArm.cost
+        + robot.base.cost;
+      this.$store.dispatch('robots/addRobotToCart', Object.assign({}, robot, { cost })).then(() => { this.$router.push('/cart'); });
       this.addedToCart = true;
     },
-  }
+  },
 };
 </script>
 
@@ -189,10 +198,10 @@ export default {
 .sale {
   color: red;
 }
-.content {
+.content{
   position: relative;
 }
-.add-to-cart {
+.add-to-cart{
   position: absolute;
   width: 210px;
   padding: 3px;

@@ -22,7 +22,7 @@ export default {
       validator(value) {
         return Number.isInteger(Number(value));
       },
-    }
+    },
   },
   computed: {
     part() {
@@ -32,4 +32,3 @@ export default {
   },
 };
 </script>
-

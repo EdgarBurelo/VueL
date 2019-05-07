@@ -41,8 +41,8 @@ export default {
   computed: {
     cart() {
       return this.$store.state.robots.cart;
-    }
-  }
+    },
+  },
 };
 </script>
 

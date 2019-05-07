@@ -58,7 +58,7 @@ export default {
     },
     cartSaleItems() {
       return this.$store.getters['robots/cartSaleItems'];
-    }
+    },
   },
 };
 </script>

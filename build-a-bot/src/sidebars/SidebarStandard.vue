@@ -8,7 +8,7 @@
 export default {
   name: 'Standard',
 
-}
+};
 </script>
 
 <style scoped>
