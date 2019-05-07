@@ -212,8 +212,7 @@ export default {
 }
 .preview {
   position: absolute;
-  top: 90px;
-  right: 150px;
+  right: 0px;
   width: 210px;
   height: 210px;
   padding: 5px;
